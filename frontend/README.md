@@ -1,16 +1,22 @@
-# React + Vite
+# TaskNote - React Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Giao diện React mô phỏng theo ảnh tham khảo: sidebar màu tím, Dashboard, Project, Note, Thùng rác và Quyền riêng tư.
 
-Currently, two official plugins are available:
+## Chạy project
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm install
+npm run dev
+```
 
-## React Compiler
+Sau đó mở địa chỉ Vite hiển thị trong terminal, thường là:
+http://localhost:5173
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Cấu trúc
 
-## Expanding the Oxlint configuration
+- `src/main.jsx`: toàn bộ component giao diện và dữ liệu demo.
+- `src/styles.css`: CSS giao diện.
+- `index.html`: file HTML gốc.
+Bạn cần đổi GitHub account trong GitHub Desktop/VS Code sang account có quyền ghi, hoặc cấp quyền Write cho 0306241018-cpu, rồi push commit main lên GitHub. Sau đó vào Render Blueprints, chọn repo ManLeVan1055/my-notes-app và deploy cấu hình render.yaml. Render sẽ tạo URL https://…onrender.com dùng được trên điện thoại và laptop.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+Cấu hình deploy đã build và chạy thử thành công. Bạn đã chọn gói miễn phí nên lưu ý dữ liệu JSON có thể mất khi dịch vụ khởi động lại hoặc deploy lại.
