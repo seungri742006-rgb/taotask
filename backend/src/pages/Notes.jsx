@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from "react";
-import Header from "../components/Header";
 import Icon from "../components/Icon";
 
 const NOTE_COLORS = [
@@ -49,7 +48,7 @@ const formatDateText = (value, mode = "created") => {
   return `${dateText}`;
 };
 
-export default function Notes({ notes = [], onAddNote, onUpdateNote, onDeleteNote, onOpenNoteDetail, searchQuery = "", onSearchChange }) {
+export default function Notes({ notes = [], onAddNote, onUpdateNote, onDeleteNote, onOpenNoteDetail, searchQuery = "" }) {
   const [showForm, setShowForm] = useState(false);
   const [editingNote, setEditingNote] = useState(null);
   const [selectedNoteId, setSelectedNoteId] = useState(null);
@@ -154,13 +153,6 @@ export default function Notes({ notes = [], onAddNote, onUpdateNote, onDeleteNot
 
   return (
     <>
-      <Header
-        title="Ghi chú"
-        subtitle="Quản lý và tìm kiếm ghi chú của bạn"
-        searchQuery={searchQuery}
-        onSearchChange={onSearchChange}
-      />
-
       {showForm && (
         <div className="modal-bg" onMouseDown={closeForm}>
           <div className="modal note-modal" onMouseDown={(e) => e.stopPropagation()}>

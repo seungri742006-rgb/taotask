@@ -154,36 +154,35 @@ export default function App() {
     setEditingProject(null);
   };
 
-  const handleToggleTask = (projectId, taskIndex, currentTasks = []) => {
+  const handleToggleTask = (projectId, taskIndex) => {
     const taskKey = `${projectId}-${taskIndex}`;
-    if (taskIndex < 0 || taskIndex >= currentTasks.length) return;
     setCheckedTasks((prev) => ({ ...prev, [taskKey]: !prev[taskKey] }));
   };
 
-  const handleAddTask = (projectId, taskText, currentTasks = []) => {
+  const handleAddTask = (projectId, taskText) => {
     const trimmed = taskText.trim();
     if (!trimmed) return;
     setTaskLists((prev) => ({
       ...prev,
-      [projectId]: [...(prev[projectId] ?? currentTasks), trimmed],
+      [projectId]: [...(prev[projectId] || []), trimmed],
     }));
   };
 
-  const handleUpdateTask = (projectId, taskIndex, nextText, currentTasks = []) => {
+  const handleUpdateTask = (projectId, taskIndex, nextText) => {
     const trimmed = nextText.trim();
     if (!trimmed) return;
 
     setTaskLists((prev) => {
-      const tasks = [...(prev[projectId] ?? currentTasks)];
+      const tasks = [...(prev[projectId] || [])];
       if (!tasks[taskIndex]) return prev;
       tasks[taskIndex] = trimmed;
       return { ...prev, [projectId]: tasks };
     });
   };
 
-  const handleDeleteTask = (projectId, taskIndex, currentTasks = []) => {
+  const handleDeleteTask = (projectId, taskIndex) => {
     setTaskLists((prev) => {
-      const tasks = [...(prev[projectId] ?? currentTasks)];
+      const tasks = [...(prev[projectId] || [])];
       if (!tasks[taskIndex]) return prev;
       return {
         ...prev,

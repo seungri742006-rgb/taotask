@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Header from "../components/Header";
 import Icon from "../components/Icon";
 
 export default function Projects({
@@ -18,7 +17,6 @@ export default function Projects({
   onUpdateTask,
   onDeleteTask,
   searchQuery = "",
-  onSearchChange,
 }) {
   const [newTask, setNewTask] = useState("");
   const [editingTask, setEditingTask] = useState({ projectId: null, index: null, value: "" });
@@ -34,13 +32,13 @@ export default function Projects({
   const selectedTasks = selectedProject ? (taskLists[selectedProject.id] || fallbackTasks) : [];
 
   const toggleTask = (projectId, taskIndex) => {
-    onToggleTask?.(projectId, taskIndex, selectedTasks);
+    onToggleTask?.(projectId, taskIndex);
   };
 
   const addTask = () => {
     const task = newTask.trim();
     if (!task || !selectedProject) return;
-    onAddTask?.(selectedProject.id, task, selectedTasks);
+    onAddTask?.(selectedProject.id, task);
     setNewTask("");
   };
 
@@ -48,19 +46,8 @@ export default function Projects({
     if (!editingTask.projectId || editingTask.index === null) return;
     const nextValue = editingTask.value.trim();
     if (!nextValue) return;
-    onUpdateTask?.(editingTask.projectId, editingTask.index, nextValue, selectedTasks);
+    onUpdateTask?.(editingTask.projectId, editingTask.index, nextValue);
     setEditingTask({ projectId: null, index: null, value: "" });
-  };
-
-  const deleteTask = (projectId, taskIndex) => {
-    if (String(editingTask.projectId) === String(projectId) && editingTask.index !== null) {
-      if (editingTask.index === taskIndex) {
-        cancelTaskEdit();
-      } else if (editingTask.index > taskIndex) {
-        setEditingTask((prev) => ({ ...prev, index: prev.index - 1 }));
-      }
-    }
-    onDeleteTask?.(projectId, taskIndex, selectedTasks);
   };
 
   const cancelTaskEdit = () => {
@@ -79,15 +66,7 @@ export default function Projects({
   };
 
   return (
-    <>
-      <Header
-        title="Dự án"
-        subtitle="Theo dõi tiến độ và công việc của từng dự án"
-        searchQuery={searchQuery}
-        onSearchChange={onSearchChange}
-      />
-
-      <section className="projects-page">
+    <section className="projects-page">
       <div className="projects-recent-panel">
         <div className="projects-recent-head">
           <div>
@@ -212,7 +191,7 @@ export default function Projects({
                                   <button
                                     type="button"
                                     className="mini-delete"
-                                    onClick={() => deleteTask(project.id, index)}
+                                    onClick={() => onDeleteTask?.(project.id, index)}
                                     aria-label="Xoá công việc"
                                   >
                                     🗑
@@ -246,7 +225,6 @@ export default function Projects({
           {filtered.length === 0 && <p className="projects-empty">{searchQuery ? "Không tìm thấy project nào phù hợp." : "Chưa có project nào."}</p>}
         </div>
       </div>
-        </section>
-    </>
+      </section>
   );
 }

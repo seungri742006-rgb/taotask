@@ -88,6 +88,106 @@ Response 401:
 
 ---
 
+## 📁 **PROJECT ENDPOINTS**
+
+### Lấy danh sách project
+```http
+GET /projects
+Authorization: ******
+
+Response 200:
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1728400000000,
+      "name": "Project mới",
+      "desc": "Mô tả project",
+      "progress": 0,
+      "color": "blue",
+      "date": "08/10/2026"
+    }
+  ]
+}
+```
+
+### Tạo project
+```http
+POST /projects
+Authorization: ******
+Content-Type: application/json
+
+Request Body:
+{
+  "name": "Project mới",
+  "desc": "Mô tả project",
+  "color": "blue",
+  "date": "08/10/2026"
+}
+
+Response 201:
+{
+  "success": true,
+  "data": {
+    "id": 1728400000000,
+    "name": "Project mới",
+    "desc": "Mô tả project",
+    "progress": 0,
+    "color": "blue",
+    "date": "08/10/2026"
+  }
+}
+
+Response 400:
+{
+  "success": false,
+  "error": "Tên project là bắt buộc"
+}
+```
+
+### Cập nhật project
+```http
+PUT /projects/:id
+Authorization: ******
+Content-Type: application/json
+
+Request Body:
+{
+  "name": "Tên project đã sửa",
+  "desc": "Mô tả đã sửa",
+  "color": "purple",
+  "date": "08/10/2026"
+}
+
+Response 200:
+{
+  "success": true,
+  "data": {
+    "id": 1728400000000,
+    "name": "Tên project đã sửa",
+    "desc": "Mô tả đã sửa",
+    "color": "purple",
+    "date": "08/10/2026"
+  }
+}
+```
+
+### Xóa project
+```http
+DELETE /projects/:id
+Authorization: ******
+
+Response 200:
+{
+  "success": true,
+  "message": "Xóa project thành công"
+}
+```
+
+Project được lưu riêng theo tài khoản trong `backend/data/users/<userId>/projects.json`.
+
+---
+
 ## 📝 **PUBLIC NOTES ENDPOINTS**
 
 ### 4. Lấy tất cả ghi chú (Get All Notes)
@@ -581,4 +681,3 @@ curl -X POST http://localhost:5000/api/notes \
 ```
 
 ---
-
